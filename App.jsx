@@ -1,4 +1,11 @@
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {Component} from 'react';
 
 class App extends Component {
@@ -9,88 +16,126 @@ class App extends Component {
       hitung: 0,
     };
   }
+
+  masukkanAngka = value => {
+    if (this.state.hitung == 0) {
+      this.setState({hitung: value});
+    } else {
+      this.setState({hitung: value + '' + this.state.hitung});
+    }
+  };
   render() {
     return (
-      <View>
-        <View style={{flexDirection: 'row'}}>
-          <View
+      <View style={styles.background}>
+        <StatusBar backgroundColor="gray" barStyle="light-content" />
+
+        {/* tampilan view bg angka yang diinput */}
+        <View
+          style={{
+            flex: 0.5,
+            backgroundColor: 'gray',
+            justifyContent: 'center',
+            marginHorizontal: 10,
+          }}>
+          <Text
             style={{
-              justifyContent: 'flex-end',
-              flex: 1,
-              alignItems: 'center',
-              padding: 10,
-              margin: 10,
+              textAlign: 'right',
+              color: 'white',
+              fontSize: 40,
+              marginHorizontal: 10,
             }}>
-            <Text
+            {this.state.hitung}
+          </Text>
+        </View>
+        {/* penutup tampilan view bg angka yang diinput */}
+
+        {/* pembuka tampilan view seluruh angka dan operator */}
+        <View style={{flex: 1}}>
+          {/* pembuka tampilan view 'clear' */}
+          <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity
               style={{
-                textAlign: 'right',
-                color: 'white',
-                fontSize: 24,
+                justifyContent: 'flex-end',
+                flex: 1,
                 padding: 10,
+                margin: 10,
               }}>
-              Clear
-            </Text>
+              <Text
+                style={{
+                  textAlign: 'right',
+                  color: 'white',
+                  fontSize: 24,
+                  padding: 10,
+                }}>
+                Clear
+              </Text>
+            </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.bgBaris}>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>(</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>)</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>/</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>x</Text>
-          </View>
-        </View>
+          {/* penutup tampilan view 'celar' */}
 
-        <View style={styles.bgBaris}>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>7</Text>
+          <View style={styles.bgBaris}>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>(</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>)</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>/</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.operator}>x</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>8</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>9</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>+</Text>
-          </View>
-        </View>
 
-        <View style={styles.bgBaris}>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>4</Text>
+          <View style={styles.bgBaris}>
+            <TouchableOpacity
+              style={styles.bgAngka}
+              onPress={() => this.masukkanAngka(7)}>
+              <Text style={styles.angka}>7</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>8</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>9</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.operator}>+</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>5</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>6</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>-</Text>
-          </View>
-        </View>
 
-        <View style={styles.bgBaris}>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>1</Text>
+          <View style={styles.bgBaris}>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>4</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>5</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>6</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.operator}>-</Text>
+            </TouchableOpacity>
           </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>2</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>3</Text>
-          </View>
-          <View style={styles.bgAngka}>
-            <Text style={styles.angka}>=</Text>
+
+          <View style={styles.bgBaris}>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>1</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>2</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.angka}>3</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.bgAngka}>
+              <Text style={styles.operator}>=</Text>
+            </TouchableOpacity>
           </View>
         </View>
+        {/* penutup tampilan view seluruh angka dan operator */}
       </View>
     );
   }
@@ -101,7 +146,7 @@ export default App;
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    backgroundColor: '#22121',
+    backgroundColor: 'gray',
   },
   bgBaris: {
     flexDirection: 'row',
@@ -115,7 +160,13 @@ const styles = StyleSheet.create({
   },
   angka: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 24,
+    textAlign: 'center',
+    padding: 10,
+  },
+  operator: {
+    color: 'orange',
+    fontSize: 24,
     textAlign: 'center',
     padding: 10,
   },
